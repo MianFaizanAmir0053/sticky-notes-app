@@ -14,10 +14,10 @@ function Todo({ todo }: { todo: any }) {
         <h1 className=" text-blue-500">{todo.title}</h1>
         <p>{todo.description}</p>
       </div>
-      <button onClick={() => startTransition(() => deleteHandler(todo.id))}>
+      <div onClick={() => startTransition(() => deleteHandler(todo.id))}>
         <DeleteIcon className=" hover:text-red-700 absolute top-4 right-2 text-red-500 cursor-pointer" />
-      </button>
-      <button
+      </div>
+      <div
         onClick={() =>
           startTransition(() => updateHandler(todo.id, todo.complete))
         }
@@ -28,7 +28,7 @@ function Todo({ todo }: { todo: any }) {
         } rounded py-2 px-4 w-fit`}
       >
         {todo.complete ? "complete" : "not completed"}
-      </button>
+      </div>
     </div>
   );
 }

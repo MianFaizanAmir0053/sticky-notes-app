@@ -29,6 +29,32 @@ export async function updateHandler(data: string, value: boolean) {
   revalidatePath("/");
 }
 
+
+export async function addHandler(data: FormData) {
+  const { title, description } = {
+    title: data.get("title")?.valueOf(),
+    description: data.get("description")?.valueOf(),
+  };
+
+  if (typeof title !== "string" || title.length === 0) {
+    throw new Error("Invalid title or description");
+  }
+
+  if (typeof description !== "string" || description.length === 0) {
+    throw new Error("Invalid title or description");
+  }
+
+  await prisma.todo.create({
+    data: {
+      title,
+      description: description,
+      complete: false,
+    },
+  });
+  revalidatePath("/");
+  redirect("/");
+}
+
 export async function editHandler(data: string, value: string) {
   if (data === undefined || value === undefined) return;
   await prisma.todo.update({
